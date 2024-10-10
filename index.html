@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Student Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+ <header>
+        <div class="header-content">
+            <img src="my.png" alt="Anubhav Khajuria (Anubhab)" class="profile-photo" id="profileImage"> <!-- Update the src with your photo file name -->
+            <div class="header-text">
+                <h1>Anubhav Khajuria(Anubhab)</h1>
+                <p>CS Graduate | Data Engineer | Research Assistant</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>
+        Hello! I’m <strong>Anubhab</strong>,  an enthusiastic graduate of computer science engineering who is now exploring the research side of computer science and I am liking it very much. I am an inspiring PhD student who would like to work on the compiler optimization for Deep learning algorithms. I've traveled to the Indian Institute of Technology Madras, where I am honored to work with Professor <a href="https://www.cse.iitm.ac.in/~rupesh/" target="_blank">Rupesh Nasre</a> as my mentor. Graph neural network code creation, optimization, and high-performance computing are the main areas of my study. I'm excited about the idea since it pairs my interest for technology with problem-solving.
+    </p>
+    <p>
+        Before my current role, I gained experience as a Data Engineer at <a href="https://www.skuad.io" target="_blank">Skuad</a>, where I worked on data pipelining and developed ETL (Extract, Transform, Load) tools that facilitated efficient data flow and analysis. My role was to keep the data flow streamline and smooth.
+    </p>
+    <p>
+        I also served as a Software Developer intern at <a href="https://www.rajasoftwarelabs.com" target="_blank">RSL Pune</a>, where I used Ember.js to maintain linkdin's web applications.
+        Additionally, I was a Web Developer intern at <a href="https://www.estah.org" target="_blank">Estah Society</a>, an NGO dedicated to supporting farmers across India. I worked on improving their website, ensuring it effectively communicated their mission and initiatives to the community.
+    </p>
+    <p>
+    <p>
+        In addition, I enjoy creating and playing video games, particularly first-person shooters and strategy games. I also enjoy working with and learning about the most recent advances in technology. I am looking forward to the future and can't wait to get in touch with like-minded people. Please get in touch if you'd like to talk about possible partnerships, exchange ideas, or simply have a tech conversation!!
+    </p>
+</section>
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+        <h3 class="project-title">Voting System App</h3>
+        <div class="project-description" style="display: none;">
+            <p>Developed a secure voting system application that operates across web, Android, and mobile platforms because of the usage of Kotlin</p>
+            <ul>
+                <li><strong>OTP (One-Time Password):</strong> Generated for each session to verify user identity.</li>
+                <li><strong>Fingerprint Recognition:</strong> Utilized biometric data for secure access.</li>
+                <li><strong>Facial Recognition:</strong> Implemented Google’s FaceNet algorithm for real-time facial recognition.</li>
+            </ul>
+            <p>The application leverages <strong>flutter and firebase</strong> for development</p>
+        </div>
+    </div>
+
+    <div class="project">
+    <h3 class="project-title">Travel Planning App</h3>
+    <div class="project-description" style="display: none;">
+        <p>
+            Developed a travel planning mobile application using <strong>Flutter</strong> that utilizes real-time weather reports to provide personalized suggestions to users. The app allows users to enter their travel details, including PNR and stay duration, and checks the status of their bookings.
+        </p>
+        <ul>
+            <li><strong>Real-Time Weather Integration:</strong> Fetches live weather data to suggest optimal travel times and locations.</li>
+            <li><strong>PNR Status Checker:</strong> Allows users to check their train PNR status directly within the app.</li>
+            <li><strong>User Details Input:</strong> Users can input their travel details for personalized suggestions.</li>
+        </ul>
+        <p>
+            The application leverages Flutter for front-end development, enabling a smooth user experience across both Android and iOS platforms.
+        </p>
+        <!-- Uncomment the lines below to add links to your project -->
+        <!-- <p>
+            <a href="link_to_your_project" target="_blank">View Project Demo</a> | 
+            <a href="link_to_github_repo" target="_blank">GitHub Repository</a>
+        </p> -->
+    </div>
+</div>
+
+</section>
+
+
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Parallel Programming frameworks (OpenMP, MPI, CUDA, OpenACC</li>
+            <li>Python, Java, C++, C#, Kotlin, flutter</li>
+
+            <li>Deep Learning(GNN and CNN)</li>
+            <li>SQL & NoSQL Databases</li>
+            <li>Ab-initio(ETL Tool)</li>
+            <li>Unity and Unreal Engine</li>
+        </ul>
+    </section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>
+        <a href="mailto:anubhavjncs@gmail.com">
+            <i class="fas fa-envelope"></i> Email: anubhavjncs@gmail.com
+        </a>
+    </p>
+    <p>
+        <a href="https://www.linkedin.com/in/anubhav-khajuria-53035b1aa/" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn: Anubhav Khajuria
+        </a>
+    </p>
+    <p>
+        <a href="https://github.com/anubhavkhajuria" target="_blank">
+            <i class="fab fa-github"></i> GitHub: anubhavkhajuria
+        </a>
+    </p>
+</section>
+
+<script>
+    const img = document.getElementById('profileImage');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+
+    img.onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src; // Set the source of the modal image to the clicked image
+    }
+
+    function closeModal() {
+        modal.style.display = "none"; // Hide the modal
+    }
+    const projectTitles = document.querySelectorAll('.project-title');
+
+projectTitles.forEach(title => {
+    title.addEventListener('click', () => {
+        const description = title.nextElementSibling;
+        if (description.style.display === "none" || description.style.display === "") {
+            description.style.display = "block";
+        } else {
+            description.style.display = "none";
+        }
+    });
+});
+</script>
+
+    <footer>
+        <p>&copy; 2024 Anubhav Khajuria(Anubhab). All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
