@@ -263,11 +263,11 @@
                         <h3 class="text-xl font-semibold text-slate-100">Research Assistant</h3>
                         <p class="font-medium text-purple-400">PACE Lab, IIT Madras</p>
                         <p class="text-sm text-slate-500 mb-2">June 2023 - Present</p>
-                        <p class="text-slate-400">Researched and implemented parallel code generation for Graph Neural Networks (GNNs), optimizing them for various high-performance backends.</p>
+                        <p class="text-slate-400">Designed and Developed Morphling a DSL for Graph Neural Networks (GNNs) for high performant training and inferencing</p>
                         <div class="details">
                             <ul class="list-disc list-inside text-slate-400 space-y-2 mt-2 pl-2">
-                                <li>Utilized StarPlat, a graph-based DSL, to design parallel code generation strategies for GNNs like Graph Convolutional Networks (GCN) and Graph Isomorphism Networks (GIN).</li>
-                                <li>Optimized the generated code for diverse architectures including CUDA for GPUs, MPI for distributed memory systems, and OpenMP for shared-memory parallelism.</li>
+                                <li>Mprhling is built on top of StarPlat, a DSL for graph analystics</li>
+                                <li>Optimized generated code for architectures including CUDA for GPUs, MPI for distributed memory systems, and OpenMP for shared-memory parallelism.</li>
                                 <li>Explored advanced parallelization techniques for both GNN inference and training, focusing on distributed and GPU-based methods to efficiently process large-scale graph datasets.</li>
                             </ul>
                         </div>
@@ -402,7 +402,7 @@
                     <h3 class="text-xl font-semibold text-slate-100 mb-4">Languages</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="tech-tag py-1 px-3 rounded-full text-sm">Python</span>
-                        <span class="tech-tag py-1 px-3 rounded-full text-sm">C++</span>
+                        <span class="tech-tag py-1 px-3 rounded-full text-sm">C,C++</span>
                         <span class="tech-tag py-1 px-3 rounded-full text-sm">Java</span>
                     </div>
                 </div>
@@ -413,6 +413,8 @@
                         <span class="tech-tag py-1 px-3 rounded-full text-sm">TensorFlow</span>
                         <span class="tech-tag py-1 px-3 rounded-full text-sm">PyG</span>
                         <span class="tech-tag py-1 px-3 rounded-full text-sm">DGL</span>
+                        <span class="tech-tag py-1 px-3 rounded-full text-sm">DistDGL</span>
+
                     </div>
                 </div>
                  <div>
@@ -427,10 +429,10 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-slate-100 mb-4">Data Engineering</h3>
+                    <h3 class="text-xl font-semibold text-slate-100 mb-4">Compiler Framework</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="tech-tag py-1 px-3 rounded-full text-sm">Ab-Initio</span>
-                        <span class="tech-tag py-1 px-3 rounded-full text-sm">PySpark</span>
+                        <span class="tech-tag py-1 px-3 rounded-full text-sm">MLIR</span>
+                        <span class="tech-tag py-1 px-3 rounded-full text-sm">LLVM</span>
                     </div>
                 </div>
             </div>
@@ -440,23 +442,23 @@
         <section id="hobbies" class="py-20 reveal">
             <h2 class="text-3xl font-bold tracking-tight text-slate-200 sm:text-4xl glow-text mb-4">Outside of Work</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-12"></div>
-            <p class="max-w-3xl text-slate-400 mb-8 text-lg">When I'm not optimizing code or diving into research, I enjoy unwinding with a few hobbies to keep me balanced.</p>
+            <p class="max-w-3xl text-slate-400 mb-8 text-lg">When I’m not wrestling with code or convincing my compiler to cooperate, I like to unwind with a few hobbies that remind me there’s life outside the terminal.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="glass-card rounded-lg p-6 text-center">
                     <h3 class="text-xl font-semibold text-slate-100">Cooking</h3>
-                    <p class="text-slate-400 mt-2">I enjoy experimenting with new recipes.</p>
+                    <p class="text-slate-400 mt-2">Not just in the digital world — I love experimenting in the kitchen too. Cooking helps me explore creativity in a different form.</p>
                 </div>
                 <div class="glass-card rounded-lg p-6 text-center">
                     <h3 class="text-xl font-semibold text-slate-100">DOTA 2</h3>
-                    <p class="text-slate-400 mt-2">I'm an avid player of the esports game DOTA 2.</p>
+                    <p class="text-slate-400 mt-2">I’m a proud DOTA 2 addict — because who needs sleep when you can spend 60 minutes arguing about mid lane strategy?</p>
                 </div>
                 <div class="glass-card rounded-lg p-6 text-center">
                     <h3 class="text-xl font-semibold text-slate-100">Badminton</h3>
-                    <p class="text-slate-400 mt-2">I like to play badminton to stay active.</p>
+                    <p class="text-slate-400 mt-2">I play badminton to balance out all those hours of coding — or at least that’s what I tell myself after missing an easy smash.</p>
                 </div>
                  <div class="glass-card rounded-lg p-6 text-center">
                     <h3 class="text-xl font-semibold text-slate-100">Table Tennis</h3>
-                    <p class="text-slate-400 mt-2">I also enjoy the quick reflexes of table tennis.</p>
+                    <p class="text-slate-400 mt-2">My go-to stress relief: intense table tennis matches with friends. Loser usually has to buy coffee — which keeps me motivated.</p>
                 </div>
             </div>
         </section>
@@ -467,7 +469,7 @@
              <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-12"></div>
             <div class="max-w-4xl space-y-4">
                  <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
-                    <p class="text-slate-300">Gave a talk in EduHiPC at the 21st IEEE International Conference on High Performance Computing, Data, and Analytics 2024.</p>
+                    <p class="text-slate-300">Gave a talk in EduHiPC at the 21st IEEE International Conference on High Performance Computing, Data, and Analytics 2024 (On behalf of my advisor Prof. Rupesh Nasre).</p>
                 </div>
                 <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
                     <p class="text-slate-300">Artifact Evaluator for 26th ACM/IFIP International Middleware Conference.</p>
@@ -475,9 +477,9 @@
                  <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
                     <p class="text-slate-300">Teacher's assistant at National Supercomputing (NSM) Week with Professor Rupesh Nasre.</p>
                 </div>
-                <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
+                <!-- <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
                     <p class="text-slate-300">Poster accepted at the student research symposium at the 32nd IEEE HiPC 2025.</p>
-                </div>
+                </div> -->
                 <div class="glass-card rounded-lg p-6 hover:border-purple-500 transition-all duration-300">
                     <p class="text-slate-300">Techgig Code Gladiators India finalist & Google Code Jam qualifier.</p>
                 </div>
