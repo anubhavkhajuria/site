@@ -476,6 +476,63 @@
         </div>
     </div>
 
+    <!-- HPC CONTROL PANEL (Collapsible) -->
+    <div id="hpc-panel" class="fixed bottom-24 right-6 z-[40000] transition-transform duration-300 transform translate-x-[150%]">
+        <div class="glass-card p-5 rounded-xl border border-white/10 w-64 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
+                <h3 class="text-xs font-bold text-primary font-mono uppercase tracking-widest">HPC Control Center</h3>
+                <!-- Close Button -->
+                <button onclick="toggleHPCPanel()" class="text-slate-500 hover:text-white text-xs">✕</button>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Clock Speed -->
+                <div>
+                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                        <span>Clock Freq</span>
+                        <span id="val-speed">1.0 GHz</span>
+                    </div>
+                    <input type="range" min="0" max="5" step="0.1" value="1" class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" oninput="updateSim('speed', this.value)">
+                </div>
+
+                <!-- Sparsity (Connection Distance) -->
+                <div>
+                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                        <span>Graph Density</span>
+                        <span id="val-sparsity">Medium</span>
+                    </div>
+                    <input type="range" min="0" max="300" step="10" value="150" class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent" oninput="updateSim('sparsity', this.value)">
+                </div>
+
+                <!-- Core Count (Particles) -->
+                <div>
+                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                        <span>Active Cores</span>
+                        <span id="val-cores">Auto</span>
+                    </div>
+                    <input type="range" min="10" max="300" step="10" value="100" class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-secondary" oninput="updateSim('cores', this.value)">
+                </div>
+            </div>
+            
+            <!-- Status LED -->
+            <div class="mt-4 flex items-center gap-2 justify-end">
+                <span class="text-[10px] text-slate-500 font-mono uppercase">System Status:</span>
+                <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e] animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toggle Button (Visible on All Screens) -->
+    <button onclick="toggleHPCPanel()" class="fixed bottom-6 right-6 z-[40000] w-12 h-12 bg-slate-900/80 rounded-full flex items-center justify-center text-primary border border-white/10 shadow-lg glass-card hover:scale-110 transition-transform group backdrop-blur-md">
+        <!-- Settings Icon -->
+        <svg class="w-6 h-6 animate-spin-slow group-hover:animate-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        
+        <!-- Tooltip -->
+        <span class="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2 py-1 bg-black/80 text-white text-[10px] rounded font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10">
+            HPC Settings
+        </span>
+    </button>
+
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
@@ -1040,18 +1097,26 @@
                 percentText.textContent = `${Math.round(progress)}%`;
                 
                 logIndex++;
-                setTimeout(runPreloader, 300); // Speed of logs
+                setTimeout(runPreloader, 200); // Faster logs (200ms)
             } else {
                 setTimeout(() => {
                     preloader.classList.add('fade-out');
-                    // Optional: Remove from DOM after fade
                     setTimeout(() => preloader.style.display = 'none', 500);
                 }, 500);
             }
         }
+
+        // --- START PRELOADER (IMMEDIATELY + FAILSAFE) ---
+        // 1. Try running immediately (Script is at end of body, so DOM exists)
+        runPreloader();
         
-        // Start preloader on load
-        window.addEventListener('load', runPreloader);
+        // 2. Failsafe: Force remove after 4 seconds if stuck
+        setTimeout(() => {
+            if (preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            }
+        }, 4000);
 
 
         // --- SCROLL PROGRESS LOGIC ---
@@ -1064,46 +1129,114 @@
         });
 
 
-        // --- INTERACTIVE GRAPH BACKGROUND LOGIC ---
+        // --- INTERACTIVE GRAPH BACKGROUND LOGIC (UPDATED FOR HPC CONTROL) ---
         const canvas = document.getElementById('graph-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
+        
+        // Simulation Parameters (Controlled by HPC Panel)
+        let simParams = {
+            speedMultiplier: 1,
+            connectionDistance: 150,
+            particleCount: 80 // Lower default count for safety
+        };
 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            // Recalculate particle count based on screen size if on "Auto" (initial load)
+            if (document.getElementById('val-cores').innerText === 'Auto') {
+                simParams.particleCount = Math.min(width * 0.05, 100); // Reduced density
+                // Update slider visual to match calculated
+                const coreSlider = document.querySelector('input[oninput*="cores"]');
+                if(coreSlider) coreSlider.value = simParams.particleCount;
+            }
+            initParticles();
         }
-        window.addEventListener('resize', resize);
-        resize();
+        
+        // Debounce resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(resize, 100);
+        });
 
         class Particle {
             constructor() {
+                this.reset();
+            }
+            reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
+                this.baseVx = (Math.random() - 0.5) * 0.5;
+                this.baseVy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 1;
             }
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
+                // Apply Speed Multiplier
+                this.x += this.baseVx * simParams.speedMultiplier;
+                this.y += this.baseVy * simParams.speedMultiplier;
+
+                // Wrap around screen
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(139, 92, 246, 0.5)'; // Primary color
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.5)'; 
                 ctx.fill();
             }
         }
 
         function initParticles() {
             particles = [];
-            const count = Math.min(width * 0.05, 100); // Responsive count
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < simParams.particleCount; i++) {
                 particles.push(new Particle());
+            }
+        }
+
+        // HPC Panel Logic
+        function updateSim(type, value) {
+            if (type === 'speed') {
+                simParams.speedMultiplier = parseFloat(value);
+                document.getElementById('val-speed').innerText = value + " GHz";
+            } else if (type === 'sparsity') {
+                simParams.connectionDistance = parseInt(value);
+                let label = "Low";
+                if (value > 100) label = "Medium";
+                if (value > 200) label = "High";
+                if (value > 280) label = "Dense";
+                if (value < 50) label = "Sparse";
+                document.getElementById('val-sparsity').innerText = label;
+            } else if (type === 'cores') {
+                const newCount = parseInt(value);
+                const diff = newCount - particles.length;
+                
+                if (diff > 0) {
+                    for(let i=0; i<diff; i++) particles.push(new Particle());
+                } else {
+                    particles.splice(0, -diff);
+                }
+                
+                simParams.particleCount = newCount;
+                document.getElementById('val-cores').innerText = newCount + " Cores";
+            }
+        }
+        
+        // Panel Toggle Logic (Updated)
+        function toggleHPCPanel() {
+            const panel = document.getElementById('hpc-panel');
+            // Simple toggle of the translate class
+            if (panel.classList.contains('translate-x-[150%]')) {
+                panel.classList.remove('translate-x-[150%]');
+                panel.classList.add('translate-x-0');
+            } else {
+                panel.classList.add('translate-x-[150%]');
+                panel.classList.remove('translate-x-0');
             }
         }
 
@@ -1121,16 +1254,18 @@
                 p.update();
                 p.draw();
 
-                // Draw lines to nearby particles
+                // Draw lines
                 for (let j = index + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dx = p.x - p2.x;
                     const dy = p.y - p2.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     
-                    if (dist < 150) {
+                    if (dist < simParams.connectionDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${1 - dist/150})`;
+                        // Opacity based on distance
+                        const alpha = 1 - (dist / simParams.connectionDistance);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha * 0.5})`; // 0.5 max opacity
                         ctx.lineWidth = 0.5;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -1138,13 +1273,12 @@
                     }
                 }
 
-                // Mouse attraction/repulsion
+                // Mouse interaction
                 if (mouse.x) {
                     const dx = p.x - mouse.x;
                     const dy = p.y - mouse.y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     if (dist < 200) {
-                        // Gentle push
                         const angle = Math.atan2(dy, dx);
                         p.x += Math.cos(angle) * 1;
                         p.y += Math.sin(angle) * 1;
@@ -1153,8 +1287,9 @@
             });
             requestAnimationFrame(animateGraph);
         }
-
-        initParticles();
+        
+        // Initial Call
+        resize();
         animateGraph();
 
 
