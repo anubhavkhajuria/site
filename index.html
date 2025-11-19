@@ -174,7 +174,8 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 10000;
+            /* Ensure cursor is above everything (Trivia Modal is 20000, Preloader 50000) */
+            z-index: 60000; 
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background-color 0.3s;
             backdrop-filter: blur(2px);
@@ -194,7 +195,8 @@
             background-color: white;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 10001;
+            /* Ensure cursor dot is on top of cursor circle */
+            z-index: 60001; 
             transform: translate(-50%, -50%);
         }
 
