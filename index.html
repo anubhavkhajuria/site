@@ -851,11 +851,27 @@
                                 2025 - Present</span>
                         </div>
                         <p class="text-slate-400 mb-4 tilt-content">
-                            Developed compiler pass pipelines in <strong>MLIR/LLVM</strong> to map sparse tensor
-                            operations to <strong>RISC-V</strong> vector extensions.
-                            Built an instruction-scheduled ViT inference pipeline, analyzing phase-ordering effects to
-                            yield <strong>1.5–2x speedups</strong> over scalar baselines.
+                            Developing compiler pass pipelines in <strong>MLIR/LLVM</strong> to map sparse tensor
+                            operations to <strong>RISC-V</strong> vector extensions for Edge AI accelerators.
                         </p>
+
+                        <button
+                            class="read-more-btn text-xs font-mono uppercase tracking-widest text-slate-500 hover:text-white flex items-center gap-2 transition-colors tilt-content">
+                            View Details <span class="text-lg leading-none">+</span>
+                        </button>
+                        <div class="details mt-2">
+                            <ul
+                                class="list-disc list-inside text-slate-400 text-sm space-y-2 pt-4 border-t border-white/5">
+                                <li>Designed the <strong>RICE Dialect</strong>: A custom MLIR dialect for optimizing
+                                    Transformer workloads on RISC-V.</li>
+                                <li>Built an instruction-scheduled <strong>ViT inference pipeline</strong> tailored for
+                                    RISC-V architectures.</li>
+                                <li>Improved LLVM/MLIR pass order by analyzing <strong>phase-ordering effects</strong>
+                                    on code quality.</li>
+                                <li>Yielded <strong>1.5–2x speedups</strong> over scalar baselines for Transformer
+                                    workloads.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
