@@ -62,26 +62,7 @@
             /* Hide default cursor for custom one */
         }
 
-        /* --- PRELOADER STYLES --- */
-        #preloader {
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-        }
 
-        #preloader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .log-line {
-            opacity: 0;
-            animation: fadeIn 0.2s forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
 
         /* --- SCROLL PROGRESS BAR --- */
         #scroll-progress {
@@ -533,21 +514,7 @@
 <body class="antialiased text-slate-200 selection:bg-primary selection:text-white">
 
     <!-- PRELOADER: System Initialization -->
-    <div id="preloader"
-        class="fixed inset-0 bg-[#050505] z-[50000] flex flex-col items-center justify-center font-mono text-primary select-none">
-        <div class="w-80 md:w-96">
-            <div class="flex justify-between items-end mb-2">
-                <div class="text-xs text-slate-500">System Initialization...</div>
-                <div class="text-xs text-primary" id="preloader-percent">0%</div>
-            </div>
-            <!-- Progress Bar Track -->
-            <div class="w-full bg-gray-900 h-1 rounded-full overflow-hidden mb-4 border border-white/10">
-                <div id="preloader-bar" class="h-full bg-primary w-0 shadow-[0_0_10px_#8b5cf6]"></div>
-            </div>
-            <!-- Terminal Logs -->
-            <div id="preloader-logs" class="h-32 font-mono text-xs text-slate-400 space-y-1"></div>
-        </div>
-    </div>
+    <!-- PRELOADER REMOVED -->
 
     <!-- SCROLL PROGRESS BAR -->
     <div id="scroll-progress"></div>
@@ -1484,58 +1451,6 @@
 
         // Start Typing
         document.addEventListener('DOMContentLoaded', typeWriter);
-
-        // --- PRELOADER LOGIC ---
-        const preloaderLogs = [
-            "Initializing compiler context...",
-            "Loading MLIR dialects: affine, linalg, vector...",
-            "Optimizing for sparse tensors...",
-            "Performing dead code elimination...",
-            "Mapping kernels to GPU blocks...",
-            "Linking system libraries...",
-            "Execution engine ready."
-        ];
-
-        const logContainer = document.getElementById('preloader-logs');
-        const progressBar = document.getElementById('preloader-bar');
-        const percentText = document.getElementById('preloader-percent');
-        const preloader = document.getElementById('preloader');
-        let logIndex = 0;
-
-        function runPreloader() {
-            if (logIndex < preloaderLogs.length) {
-                const log = document.createElement('div');
-                log.textContent = `> ${preloaderLogs[logIndex]}`;
-                log.className = "log-line";
-                logContainer.appendChild(log);
-                logContainer.scrollTop = logContainer.scrollHeight;
-
-                // Update progress
-                const progress = ((logIndex + 1) / preloaderLogs.length) * 100;
-                progressBar.style.width = `${progress}%`;
-                percentText.textContent = `${Math.round(progress)}%`;
-
-                logIndex++;
-                setTimeout(runPreloader, 200); // Faster logs (200ms)
-            } else {
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                    setTimeout(() => preloader.style.display = 'none', 500);
-                }, 500);
-            }
-        }
-
-        // --- START PRELOADER (IMMEDIATELY + FAILSAFE) ---
-        // 1. Try running immediately (Script is at end of body, so DOM exists)
-        runPreloader();
-
-        // 2. Failsafe: Force remove after 4 seconds if stuck
-        setTimeout(() => {
-            if (preloader.style.display !== 'none') {
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.display = 'none', 500);
-            }
-        }, 4000);
 
 
         // --- SCROLL PROGRESS LOGIC ---
